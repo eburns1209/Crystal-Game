@@ -14,19 +14,27 @@ $(document).ready(function(){
 	newGame();
 
 	function newCrystals (){
-		var numbers = []
-			while (numbers.length < 4){
+	//initialize an array
+	var numbers = []
+	//generate x random numbers into an array
+		while (numbers.length < 4){
+			//generate random number
 				var randomnumber = Math.ceil(Math.random() * 12)
+				//initialize boolean
 				var found = false;
 				for (var i =0; i < numbers.length; i++){
+					//if the number exists in array then break from while loop
 					if (numbers[i] === randomnumber){
 							found === true; break
-					}
+						}
 				}
-				if (!found)numbers[numbers.length]=randomnumber;
-			}
-		console.log(numbers);
+					//if the number is not found then add it to array
+					if (!found)numbers[numbers.length]=randomnumber;
+		}
 
+		//collect numbers from array in console
+		console.log(numbers);
+		//generates a loop to add images to buttons
 		for (i = 0; i < numbers.length; i++){
 			var imageCrystal = $("<img>");
 			imageCrystal.attr("data-num" , numbers[i]);
@@ -42,10 +50,13 @@ $(document).ready(function(){
 			counter = 0;
 			$("#yourScore").text(counter);
 
-			function randomIntFromInterval(min, max){
-				return Math.floor(Math.random() * (max-min+1)+min);
-			}
-			var numberToGuess = randomIntFromInterval(19,120);
+			function getRandomInRange(min, max){
+//this below function (for number to guess) is going to return a random integer in the range, and 
+//include both min and max
+				return Math.floor(Math.random() * (max-min+1))+min;
+				}
+			
+			var numberToGuess = getRandomInRange(19,120);
 
 			$(".value").text(numberToGuess);
 
@@ -55,7 +66,6 @@ $(document).ready(function(){
 				$("#yourScore").text(counter);
 
 				if (counter === numberToGuess){
-					// $("#status").text("You Won");
 					wins++;
 					$("#win").text(wins);
 					console.log(wins)
@@ -64,7 +74,6 @@ $(document).ready(function(){
 					newGame();
 				}
 				else if(counter > numberToGuess){
-					// $("#status").text("You lost")
 					losses++;
 					$("#loss").text(losses);
 					console.log(losses)
@@ -74,7 +83,7 @@ $(document).ready(function(){
 				}
 			});
 		}
-	});
+});
 
 
   
